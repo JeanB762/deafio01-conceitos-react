@@ -1,0 +1,37 @@
+.newTask {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: calc(0px - 1rem - 10px);
+}
+
+.newTask button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 0;
+  background: var(--blue-dark);
+  color: var(--gray-100);
+  font-weight: bold;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background-color 0.1s;
+}
+
+.newTask button svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.newTask input[type='text'] {
+  width: 100%;
+  border: 1px solid var(--gray-700);
+  border-radius: 8px;
+  background: var(--gray-500);
+  color: var(--gray-300);
+  padding: 1rem;
+}
