@@ -3,36 +3,50 @@ import styles from './Task.module.css';
 
 import { Check, Trash } from 'phosphor-react';
 
-export function Task() {
-  const [checked, setChecked] = useState(false);
+export interface ITask {
+  id: string;
+  content: string;
+  completed: boolean;
+}
 
-  function handleCheckboxChange(event: ChangeEvent<HTMLInputElement>) {
-    setChecked(event.target.checked);
+interface ITaskProps {
+  task: ITask;
+  toggleCompleted: (task: ITask) => void;
+  onDeleteTask: (task: ITask) => void;
+}
+
+export function Task({ task, toggleCompleted, onDeleteTask }: ITaskProps) {
+  function handleDelete() {
+    onDeleteTask(task);
   }
+
   return (
-    <div className={styles.task}>
-      <div className={styles.checkWrapper}>
-        <input
-          type='checkbox'
-          id='cheackbox-task'
-          checked={checked}
-          onChange={handleCheckboxChange}
-        />
-        <label htmlFor='cheackbox-task'>
-          {checked ? (
-            <div className={styles.checked}>
-              <Check />
-            </div>
-          ) : (
-            <div className={styles.unchecked} />
-          )}
-        </label>
+    <div className={styles.taskContainer}>
+      <div className={styles.taskWrapper}>
+        <div className={styles.checkWrapper}>
+          <input
+            type='checkbox'
+            id={task.id}
+            checked={task.completed}
+            onChange={() => toggleCompleted(task)}
+          />
+          <label htmlFor={task.id}>
+            {task.completed ? (
+              <div className={styles.checked}>
+                <Check />
+              </div>
+            ) : (
+              <div className={styles.unchecked} />
+            )}
+          </label>
+        </div>
+        <span className={`${task.completed && styles.textChecked}`}>
+          {task.content}
+        </span>
       </div>
-      <span className={`${checked && styles.textChecked}`}>
-        Integer urna interdum massa libero auctor neque turpis turpis semper.
-        Duis vel sed fames integer.
-      </span>
-      <Trash className={styles.trash} />
+      <button title='Deletar Task' onClick={handleDelete}>
+        <Trash className={styles.trash} />
+      </button>
     </div>
   );
 }

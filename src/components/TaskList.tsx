@@ -1,15 +1,43 @@
 import { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { Task, ITask } from './Task';
 import clipBoard from '../assets/Clipboard.svg';
-import { Task } from './Task';
 import styles from './TaskList.module.css';
 
 export function TaskList() {
   const [hasTasks, setHasTasks] = useState(false);
-  const [tasks, setTasks] = useState([1, 2, 3, 4]);
+  const [tasks, setTasks] = useState<ITask[]>([
+    {
+      completed: false,
+      content: 'teste',
+      id: uuidv4(),
+    },
+  ]);
 
   useEffect(() => {
     tasks.length > 0 ? setHasTasks(true) : setHasTasks(false);
   }, [tasks]);
+
+  function addTask(task: ITask) {
+    setTasks([...tasks, task]);
+  }
+
+  function handleToggleCompletedTask(taskToToggle: ITask) {
+    setTasks((state) =>
+      state.map((task) =>
+        task.id === taskToToggle.id
+          ? { ...task, completed: !task.completed }
+          : task
+      )
+    );
+  }
+
+  function deleteTask(taskToDelete: ITask) {
+    const newCommentsWithoutDeletedOne = tasks.filter(
+      (task) => task.id !== taskToDelete.id
+    );
+    setTasks(newCommentsWithoutDeletedOne);
+  }
 
   return (
     <div className={styles.tasks}>
@@ -20,7 +48,14 @@ export function TaskList() {
       {hasTasks ? (
         <div className={styles.tasksList}>
           {tasks.map((task) => {
-            return <Task key={task} />;
+            return (
+              <Task
+                key={task.id}
+                task={task}
+                toggleCompleted={handleToggleCompletedTask}
+                onDeleteTask={deleteTask}
+              />
+            );
           })}
         </div>
       ) : (
