@@ -6,11 +6,12 @@ import styles from './TaskList.module.css';
 import { NewTask } from './NewTask';
 
 export function TaskList() {
-  const [hasTasks, setHasTasks] = useState(false);
+  const [completedTasksCount, setCompletedTasksCount] = useState(0);
   const [tasks, setTasks] = useState<ITask[]>([]);
 
   useEffect(() => {
-    tasks.length > 0 ? setHasTasks(true) : setHasTasks(false);
+    const completedTasks = tasks.filter((task) => task.completed);
+    setCompletedTasksCount(completedTasks.length);
   }, [tasks]);
 
   function handleToggleCompletedTask(taskToToggle: ITask) {
@@ -36,10 +37,18 @@ export function TaskList() {
 
       <div className={styles.tasks}>
         <div className={styles.tasksInfo}>
-          <span className={styles.createdTasks}>Tarefas criadas</span>
-          <span className={styles.completedTasks}>Concluídas</span>
+          <div className={styles.createdTasks}>
+            Tarefas criadas
+            <div className={styles.counter}>{tasks.length}</div>
+          </div>
+          <div className={styles.completedTasks}>
+            Concluídas
+            <div
+              className={styles.counter}
+            >{`${completedTasksCount} de ${tasks.length}`}</div>
+          </div>
         </div>
-        {hasTasks ? (
+        {tasks.length > 0 ? (
           <div className={styles.tasksList}>
             {tasks.map((task) => {
               return (
