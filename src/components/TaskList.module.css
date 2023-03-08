@@ -1,0 +1,49 @@
+.tasks {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tasks .tasksInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tasks .tasksInfo .createdTasks {
+  font-size: 0.875rem;
+  color: var(--blue);
+  font-weight: bold;
+}
+.tasks .tasksInfo .completedTasks {
+  font-size: 0.875rem;
+  color: var(--purple);
+  font-weight: bold;
+}
+
+.tasks .tasksList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tasks .tasksListEmpty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1.5rem;
+  gap: 1rem;
+  border-top: 1px solid var(--gray-400);
+  border-radius: 8px;
+  color: var(--gray-300);
+  line-height: 1.4;
+}
+
+.tasks .tasksListEmpty .tasksInfo_bold {
+  font-weight: bold;
+}
+
+.tasks .tasksListEmpty img {
+  height: 3.5rem;
+}
