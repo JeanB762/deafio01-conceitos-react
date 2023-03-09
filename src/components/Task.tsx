@@ -1,7 +1,5 @@
-import { ChangeEvent, useState } from 'react';
-import styles from './Task.module.css';
-
 import { Check, Trash } from 'phosphor-react';
+import styles from './Task.module.css';
 
 export interface ITask {
   id: string;

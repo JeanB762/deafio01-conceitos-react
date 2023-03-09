@@ -1,17 +1,23 @@
 import { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { Task, ITask } from './Task';
+import { NewTask } from './NewTask';
 import clipBoard from '../assets/Clipboard.svg';
 import styles from './TaskList.module.css';
-import { NewTask } from './NewTask';
 
 export function TaskList() {
   const [completedTasksCount, setCompletedTasksCount] = useState(0);
-  const [tasks, setTasks] = useState<ITask[]>([]);
+  const [tasks, setTasks] = useState<ITask[]>(() => {
+    const tasksLocalStorage = localStorage.getItem('@desafio01:tasks');
+    if (tasksLocalStorage) {
+      return JSON.parse(tasksLocalStorage);
+    }
+    return [];
+  });
 
   useEffect(() => {
     const completedTasks = tasks.filter((task) => task.completed);
     setCompletedTasksCount(completedTasks.length);
+    localStorage.setItem('@desafio01:tasks', JSON.stringify(tasks));
   }, [tasks]);
 
   function handleToggleCompletedTask(taskToToggle: ITask) {
@@ -33,7 +39,7 @@ export function TaskList() {
 
   return (
     <>
-      <NewTask setTasks={setTasks} />
+      <NewTask tasks={tasks} setTasks={setTasks} />
 
       <div className={styles.tasks}>
         <div className={styles.tasksInfo}>

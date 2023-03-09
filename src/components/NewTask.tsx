@@ -8,14 +8,15 @@ import {
   SetStateAction,
   useState,
 } from 'react';
-import styles from './NewTask.module.css';
 import { ITask } from './Task';
+import styles from './NewTask.module.css';
 
 interface NewTaskProps {
+  tasks: ITask[];
   setTasks: Dispatch<SetStateAction<ITask[]>>;
 }
 
-export function NewTask({ setTasks }: NewTaskProps) {
+export function NewTask({ tasks, setTasks }: NewTaskProps) {
   const [newTask, setNewTask] = useState('');
 
   function handleCreateNewTask(event: FormEvent) {
