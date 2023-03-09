@@ -19,7 +19,16 @@
   font-size: 0.875rem;
   line-height: 1.4;
   cursor: pointer;
-  transition: background-color 0.1s;
+  transition: background-color 0.2s;
+}
+
+.newTask button:not(:disabled):hover {
+  background: var(--blue);
+}
+
+.newTask button[type='submit']:disabled {
+  /* opacity: 0.7; */
+  cursor: not-allowed;
 }
 
 .newTask button svg {
@@ -34,4 +43,10 @@
   background: var(--gray-500);
   color: var(--gray-300);
   padding: 1rem;
+}
+
+.newTask input[type='text']:focus {
+  outline: transparent;
+  box-shadow: 0 0 0 2px var(--purple-dark);
+  color: var(--gray-100);
 }

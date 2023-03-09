@@ -35,11 +35,12 @@
   border-radius: 50%;
   border: 1px solid var(--purple-dark);
   background-color: var(--purple-dark);
+  transition: background-color 0.1s;
+  cursor: pointer;
 }
 
-.taskContainer .textChecked {
-  text-decoration: line-through;
-  color: var(--gray-300);
+.taskContainer .checked:hover {
+  background-color: var(--purple);
 }
 
 .taskContainer .unchecked {
@@ -47,6 +48,17 @@
   width: 1.25rem;
   border-radius: 50%;
   border: 1px solid var(--blue);
+  transition: background-color 0.1s;
+  cursor: pointer;
+}
+
+.taskContainer .unchecked:hover {
+  background-color: rgba(30, 111, 159, 0.2);
+}
+
+.taskContainer .textChecked {
+  text-decoration: line-through;
+  color: var(--gray-300);
 }
 
 .taskContainer .trash {
